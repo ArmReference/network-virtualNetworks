@@ -1,0 +1,64 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "Name": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+      }
+    },
+    "AddressPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "The address prefix for the subnet."
+      }
+    },
+    "NetworkSecurityGroupId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The reference of the NetworkSecurityGroup resource."
+      }
+    },
+    "RouteTableId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The reference of the RouteTable resource."
+      }
+    },
+    "ServiceEndpointId": {
+      "type": "array",
+      "defaultValue": [ ],
+      "metadata": {
+        "description": "An array of service endpoints."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/VirtualNetworks/CreateOrUpdate#definitions_subnet"
+    },
+    "NsgId": "[if(empty(parameters('NetworkSecurityGroupId')),json('null'),json(concat('{\"id\":','\"',parameters('NetworkSecurityGroupId'),'\"}')))]",
+    "RouteId": "[if(empty(parameters('RouteTableId')),json('null'),json(concat('{\"id\":','\"',parameters('RouteTableId'),'\"}')))]",
+    "SvcEndpointArray": "[if(empty(parameters('ServiceEndpointId')),json('null'),parameters('ServiceEndpointId'))]",
+    "subnet": {
+      "name": "[parameters('Name')]",
+      "properties": {
+        "addressPrefix": "[parameters('AddressPrefix')]",
+        "networkSecurityGroup": "[variables('NsgId')]",
+        "routeTable": "[variables('RouteId')]",
+        "serviceEndpoints": "[variables('SvcEndpointArray')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "subnet": {
+      "type": "object",
+      "value": "[variables('subnet')]"
+    }
+  }
+}

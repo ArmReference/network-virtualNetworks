@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "Locations": {
+      "type": "array",
+      "defaultValue": [ ],
+      "metadata": {
+        "description": "A list of locations."
+      }
+    },
+    "Service": {
+      "type": "string",
+      "allowedValues": [
+        "Microsoft.Storage",
+        "Microsoft.Sql"
+      ],
+      "metadata": {
+        "description": "The type of the endpoint service."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/virtualnetworks/createorupdate#definitions_serviceendpointpropertiesformat"
+    },
+    "locArray": "[if(empty(parameters('Locations')),json('null'),parameters('Locations'))]",
+    "serviceEndpoint": {
+      "service": "[parameters('Service')]",
+      "locations": "[variables('locArray')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "serviceEndpoint": {
+      "type": "object",
+      "value": "[variables('serviceEndpoint')]"
+    }
+  }
+}

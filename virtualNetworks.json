@@ -1,0 +1,93 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource name."
+      }
+    },
+    "addressSpace": {
+      "type": "array",
+      "metadata": {
+        "description": "The address prefix for the subnet."
+      }
+    },
+    "dhcpOptions": {
+      "type": "array",
+      "defaultValue": [ ],
+      "metadata": {
+        "description": "The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network."
+      }
+    },
+    "enableDdosProtection": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Indicates if DDoS protection is enabled for all the protected resources in a Virtual Network."
+      }
+    },
+    "enableVmProtection": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Indicates if Vm protection is enabled for all the subnets in a Virtual Network."
+      }
+    },
+    "subnets": {
+      "type": "array",
+      "metadata": {
+        "description": "A list of subnets in a Virtual Network."
+      }
+    },
+    "virtualNetworkPeerings": {
+      "type": "array",
+      "defaultValue": [ ],
+      "metadata": {
+        "description": "A list of peerings in a Virtual Network."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/virtualnetworks/createorupdate#definitions_virtualnetwork"
+    },
+    "virtualNetworks": {
+      "name": "[parameters('Name')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2017-09-01",
+      "dependsOn": [ ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": "[parameters('addressSpace')]"
+        },
+        "subnets": "[parameters('subnets')]",
+        "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+      }
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('Name')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2017-09-01",
+      "dependsOn": [ ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": "[parameters('addressSpace')]"
+        },
+        "subnets": "[parameters('subnets')]",
+        "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+      }
+    }
+  ],
+  "outputs": {
+    "virtualNetworks": {
+      "type": "object",
+      "value": "[variables('virtualNetworks')]"
+    }
+  }
+}

@@ -44,6 +44,9 @@
     }
   },
   "variables": {
+    "comment": {
+      "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/virtualnetworks/createorupdate#definitions_virtualnetworkpeering"
+    },
     "virtualNetworkPeerings": {
       "apiVersion": "2017-09-01",
       "type": "virtualNetworkPeerings",

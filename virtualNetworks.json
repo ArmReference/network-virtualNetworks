@@ -63,9 +63,9 @@
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
         },
-        "subnets": "[parameters('subnets')]"
-      },
-      "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+        "subnets": "[parameters('subnets')]",
+        "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+      }
     }
   },
   "resources": [
@@ -79,9 +79,9 @@
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
         },
-        "subnets": "[parameters('subnets')]"
-      },
-      "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+        "subnets": "[parameters('subnets')]",
+        "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+      }
     }
   ],
   "outputs": {

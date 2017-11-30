@@ -63,29 +63,10 @@
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
         },
-        "subnets": "[parameters('subnets')]",
-        "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
-      }
-    },
-    "vnetProperties": [
-      {
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": "[parameters('addressSpace')]"
-          },
-          "subnets": "[parameters('subnets')]",
-        }
+        "subnets": "[parameters('subnets')]"
       },
-      {
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": "[parameters('addressSpace')]"
-          },
-          "subnets": "[parameters('subnets')]",
-          "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
-        }
-      }
-    ]
+      "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+    }
   },
   "resources": [
     {
@@ -94,7 +75,13 @@
       "location": "[resourceGroup().location]",
       "apiVersion": "2017-09-01",
       "dependsOn": [ ],
-      "properties": "[if(empty(parameters('virtualNetworkPeerings')),variables('vnetProperties')[0],variables('vnetProperties')[1])]"
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": "[parameters('addressSpace')]"
+        },
+        "subnets": "[parameters('subnets')]"
+      },
+      "resources": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
     }
   ],
   "outputs": {

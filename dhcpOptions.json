@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "DnsServers": {
+      "type": "string",
+      "metadata": {
+        "description": "The list of DNS servers IP addresses."
+      }
+    }
+  },
+  "variables": {
+    "comment": {
+      "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/VirtualNetworks/CreateOrUpdate#definitions_dhcpoptions"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "dnsServers": {
+      "type": "string",
+      "value": "[parameters('DnsServers')]"
+    }
+  }
+}

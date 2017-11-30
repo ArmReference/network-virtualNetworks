@@ -63,6 +63,9 @@
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
         },
+        "dhcpOptions": {
+          "dnsServers": "[if(empty(parameters('dhcpOptions')),json('null'),parameters('dhcpOptions'))]"
+        },
         "subnets": "[parameters('subnets')]",
         "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
       }
@@ -78,6 +81,9 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
+        },
+        "dhcpOptions": {
+          "dnsServers": "[if(empty(parameters('dhcpOptions')),json('null'),parameters('dhcpOptions'))]"
         },
         "subnets": "[parameters('subnets')]",
         "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"

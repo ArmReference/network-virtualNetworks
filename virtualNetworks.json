@@ -40,13 +40,6 @@
       "metadata": {
         "description": "A list of subnets in a Virtual Network."
       }
-    },
-    "virtualNetworkPeerings": {
-      "type": "array",
-      "defaultValue": [ ],
-      "metadata": {
-        "description": "A list of peerings in a Virtual Network."
-      }
     }
   },
   "variables": {
@@ -66,8 +59,7 @@
         "dhcpOptions": {
           "dnsServers": "[if(empty(parameters('dhcpOptions')),json('null'),parameters('dhcpOptions'))]"
         },
-        "subnets": "[parameters('subnets')]",
-        "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+        "subnets": "[parameters('subnets')]"
       }
     }
   },
@@ -85,8 +77,7 @@
         "dhcpOptions": {
           "dnsServers": "[if(empty(parameters('dhcpOptions')),json('null'),parameters('dhcpOptions'))]"
         },
-        "subnets": "[parameters('subnets')]",
-        "virtualNetworkPeerings": "[if(empty(parameters('virtualNetworkPeerings')),json('null'),parameters('virtualNetworkPeerings'))]"
+        "subnets": "[parameters('subnets')]"
       }
     }
   ],

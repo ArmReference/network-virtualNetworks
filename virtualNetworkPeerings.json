@@ -48,7 +48,11 @@
       "documentation": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/virtualnetworks/createorupdate#definitions_virtualnetworkpeering"
     },
     "virtualNetworkPeerings": {
+      "apiVersion": "2017-09-01",
+      "type": "virtualNetworkPeerings",
       "name": "[parameters('Name')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [ ],
       "properties": {
         "allowVirtualNetworkAccess": "[parameters('AllowVirtualNetworkAccess')]",
         "allowForwardedTraffic": "[parameters('AllowForwardedTraffic')]",
@@ -61,6 +65,22 @@
     }
   },
   "resources": [
+    {
+      "apiVersion": "2017-09-01",
+      "type": "virtualNetworkPeerings",
+      "name": "[parameters('Name')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [ ],
+      "properties": {
+        "allowVirtualNetworkAccess": "[parameters('AllowVirtualNetworkAccess')]",
+        "allowForwardedTraffic": "[parameters('AllowForwardedTraffic')]",
+        "allowGatewayTransit": "[parameters('AllowGatewayTransit')]",
+        "useRemoteGateways": "[parameters('UseRemoteGateways')]",
+        "remoteVirtualNetwork": {
+          "id": "[parameters('RemoteVirtualNetworkId')]"
+        }
+      }
+    }
   ],
   "outputs": {
     "virtualNetworkPeerings": {

@@ -16,7 +16,7 @@
     },
     "dhcpOptions": {
       "type": "array",
-      "defaultValue": [ ],
+      "defaultValue": [],
       "metadata": {
         "description": "The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network."
       }
@@ -40,6 +40,13 @@
       "metadata": {
         "description": "A list of subnets in a Virtual Network."
       }
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
     }
   },
   "variables": {
@@ -51,7 +58,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[resourceGroup().location]",
       "apiVersion": "2017-09-01",
-      "dependsOn": [ ],
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"
@@ -69,7 +76,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[resourceGroup().location]",
       "apiVersion": "2017-09-01",
-      "dependsOn": [ ],
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": "[parameters('addressSpace')]"

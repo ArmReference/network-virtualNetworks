@@ -70,24 +70,7 @@
       }
     }
   },
-  "resources": [
-    {
-      "name": "[parameters('Name')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2017-09-01",
-      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": "[parameters('addressSpace')]"
-        },
-        "dhcpOptions": {
-          "dnsServers": "[if(empty(parameters('dhcpOptions')),json('null'),parameters('dhcpOptions'))]"
-        },
-        "subnets": "[parameters('subnets')]"
-      }
-    }
-  ],
+  "resources": [],
   "outputs": {
     "virtualNetworks": {
       "type": "object",
